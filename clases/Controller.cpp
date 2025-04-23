@@ -8,16 +8,24 @@ using namespace std;
 class Controller
 {
 private:
-  MediaVector *medias;
+  MediaVector *movies;
 
 public:
-  Controller(MediaVector *vector_media) : medias(vector_media)
+  Controller(MediaVector *vector_media) : movies(vector_media)
   {
   }
-  void print()
+  void print_movies()
   {
     Movies::design();
-    for (Media *media : (*medias))
+    for (Media *media : (*movies))
+    {
+      media->print();
+    };
+  }
+  static void print_movies(MediaVector *sorted_movies)
+  {
+    Movies::design();
+    for (Media *media : (*sorted_movies))
     {
       media->print();
     };
