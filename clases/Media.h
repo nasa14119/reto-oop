@@ -2,6 +2,8 @@
 #define MEDIA
 #include <iomanip>
 #include <vector>
+class Media;
+using MediaVector = std::vector<Media *>;
 class Media
 {
 protected:
@@ -20,6 +22,9 @@ public:
     Media::score = score;
   };
   virtual void print() = 0;
+  int get_score() { return score; };
+  float get_duration() { return duration; };
+  std::string get_gender() { return gender; };
+  std::string get_title() { return title; };
 };
-using MediaVector = std::vector<Media *>;
 #endif

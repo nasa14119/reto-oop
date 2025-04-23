@@ -6,6 +6,7 @@
 #include "clases/Movies.cpp"
 #include "clases/Media.h"
 #include "clases/Controller.cpp"
+#include "clases/Filters.cpp"
 using namespace std;
 void file_setup(MediaVector &media)
 {
@@ -15,6 +16,10 @@ void file_setup(MediaVector &media)
   string path_series = utils::get_file_path("../series.csv");
 
   ifstream file_movie(path_movies);
+  if (!file_movie.is_open())
+  {
+    throw "Error reading file";
+  }
   while (getline(file_movie, line))
   {
     stringstream ss(line);
@@ -29,10 +34,12 @@ void file_setup(MediaVector &media)
 };
 int main()
 {
-  utils::clear();
+  // utils::clear();
   MediaVector media;
   file_setup(media);
   Controller control(&media);
-  control.print();
+  // control.print_movies();
+  MediaVector filter_movies = filters::filter_by_title(media);
+  Controller::print_movies(&filter_movies);
   return 0;
 }

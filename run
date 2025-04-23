@@ -3,5 +3,5 @@ cd build
 ninja -t clean
 cmake ..
 ninja
-clean
+clear
 ./index
