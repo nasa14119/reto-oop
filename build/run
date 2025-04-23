@@ -1,5 +1,0 @@
-ninja -t clean
-cmake ..
-ninja
-clear
-./index
