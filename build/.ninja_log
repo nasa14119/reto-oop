@@ -1,0 +1,10 @@
+# ninja log v6
+3	375	1745379633920198749	CMakeFiles/index.dir/clases/Controller.cpp.o	80e0960386c09a2
+5	248	1745344725364243413	CMakeFiles/index.dir/clases/Media.cpp.o	c0d04af087cfb17c
+2	410	1745379633919947826	CMakeFiles/index.dir/utils.cpp.o	85dc38fc0b020971
+445	481	1745379634362147757	index	dbb63a79a006e50c
+2	445	1745379633919600817	CMakeFiles/index.dir/main.cpp.o	6684d2cdb2fa6208
+2	442	1745380680152128918	CMakeFiles/index.dir/clases/Controller.cpp.o	80e0960386c09a2
+2	488	1745380680151912829	CMakeFiles/index.dir/utils.cpp.o	85dc38fc0b020971
+2	545	1745380680151620363	CMakeFiles/index.dir/main.cpp.o	6684d2cdb2fa6208
+545	647	1745380680694972491	index	dbb63a79a006e50c

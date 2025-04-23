@@ -1,0 +1,3 @@
+/Users/nicolasamaya/Documents/Programacion/tec/semestre_2/OOP/reto/build/CMakeFiles/index.dir
+/Users/nicolasamaya/Documents/Programacion/tec/semestre_2/OOP/reto/build/CMakeFiles/edit_cache.dir
+/Users/nicolasamaya/Documents/Programacion/tec/semestre_2/OOP/reto/build/CMakeFiles/rebuild_cache.dir
