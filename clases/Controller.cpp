@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <vector>
 #include "Media.h"
+#include "Movies.cpp"
 using namespace std;
 class Controller
 {
@@ -15,7 +16,8 @@ public:
   }
   void print()
   {
-    for (Media *media : *medias)
+    Movies::design();
+    for (Media *media : (*medias))
     {
       media->print();
     };

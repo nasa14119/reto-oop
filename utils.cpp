@@ -10,5 +10,5 @@ string utils::get_file_path(string str)
 }
 void utils::clear()
 {
-  cout << "\033[2J\033[H";
+  cout << "\033[2J\033[H" << flush;
 };

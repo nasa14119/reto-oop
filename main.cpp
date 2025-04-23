@@ -7,7 +7,7 @@
 #include "clases/Media.h"
 #include "clases/Controller.cpp"
 using namespace std;
-constexpr void file_setup(MediaVector &media)
+void file_setup(MediaVector &media)
 {
   string values[6];
   string line;
@@ -25,9 +25,11 @@ constexpr void file_setup(MediaVector &media)
     }
     media.emplace_back(new Movies(values[0], values[1], values[2], stoi(values[3]), stof(values[4]), values[5]));
   }
+  file_movie.close();
 };
 int main()
 {
+  utils::clear();
   MediaVector media;
   file_setup(media);
   Controller control(&media);
