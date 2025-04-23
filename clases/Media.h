@@ -1,6 +1,7 @@
 #ifndef MEDIA
 #define MEDIA
 #include <iomanip>
+#include <vector>
 class Media
 {
 protected:
@@ -20,4 +21,5 @@ public:
   };
   virtual void print() = 0;
 };
+using MediaVector = std::vector<Media *>;
 #endif

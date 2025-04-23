@@ -5,10 +5,9 @@
 #include <sstream>
 #include "clases/Movies.cpp"
 #include "clases/Media.h"
-
+#include "clases/Controller.cpp"
 using namespace std;
-
-constexpr void file_setup(vector<Media *> &media)
+constexpr void file_setup(MediaVector &media)
 {
   string values[6];
   string line;
@@ -29,12 +28,9 @@ constexpr void file_setup(vector<Media *> &media)
 };
 int main()
 {
-  vector<Media *> media;
+  MediaVector media;
   file_setup(media);
-  for (auto movie : media)
-  {
-    movie->print();
-  };
-  Movies::design();
+  Controller control(&media);
+  control.print();
   return 0;
 }
