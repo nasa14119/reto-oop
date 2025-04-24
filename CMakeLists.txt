@@ -8,4 +8,4 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add an executable from your source files
-add_executable(index main.cpp utils.cpp utils.h clases/Media.h clases/Controller.cpp)
+add_executable(index main.cpp utils.cpp utils.h clases/Media.h clases/Controller.cpp clases/User.cpp)

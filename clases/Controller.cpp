@@ -1,36 +1,35 @@
-#ifndef CONTROLLER
-#define CONTROLLER
-#include <iomanip>
-#include <vector>
-#include "Media.h"
+#include "Controller.h"
+#include "User.h"
 #include "Movies.cpp"
-using namespace std;
-class Controller
+Controller::Controller(MediaVector *vector_media, User *user) : movies(vector_media), user(user)
 {
-private:
-  MediaVector *movies;
+}
 
-public:
-  Controller(MediaVector *vector_media) : movies(vector_media)
+void Controller::print_movies()
+{
+  Movies::design();
+  for (Media *media : (*movies))
   {
-  }
-  void print_movies()
+    media->print();
+  };
+  std::cout << std::endl;
+}
+
+void Controller::menu_user()
+{
+  utils::clear();
+  std::cout << "1. Save Movie" << "\n";
+  std::cout << "2. Save Serie" << "\n";
+  std::cout << "3. Rank Movie" << "\n";
+  std::cout << "4. Rank Serie" << "\n";
+}
+
+void Controller::print_movies(MediaVector *sorted_movies)
+{
+  Movies::design();
+  for (Media *media : (*sorted_movies))
   {
-    Movies::design();
-    for (Media *media : (*movies))
-    {
-      media->print();
-    };
-    cout << endl;
-  }
-  static void print_movies(MediaVector *sorted_movies)
-  {
-    Movies::design();
-    for (Media *media : (*sorted_movies))
-    {
-      media->print();
-    };
-    cout << endl;
-  }
-};
-#endif
+    media->print();
+  };
+  std::cout << std::endl;
+}

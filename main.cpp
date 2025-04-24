@@ -5,9 +5,9 @@
 #include <sstream>
 #include "clases/Movies.cpp"
 #include "clases/Media.h"
-#include "clases/Controller.cpp"
+#include "clases/Controller.h"
 #include "clases/Filters.cpp"
-#include "clases/User.cpp"
+#include "clases/User.h"
 using namespace std;
 const string MOVIES_str = "movies";
 const string SERIES_str = "series";
@@ -20,5 +20,7 @@ int main()
   MediaVector media;
   file_setup(media);
   User user;
+  Controller control(&media, &user);
+  control.menu_user();
   return 0;
 }

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include "Controller.cpp"
+#include "Controller.h"
 #include "Media.h"
 using std::string;
 namespace filters
