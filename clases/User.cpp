@@ -2,6 +2,7 @@
 #define USER
 #include "../utils.h"
 #include "Movies.cpp"
+#include "Controller.cpp"
 #include <fstream>
 using namespace std;
 extern const string MOVIES_str;
@@ -9,7 +10,7 @@ extern const string SERIES_str;
 class User
 {
 private:
-  MediaVector *videos;
+  MediaVector videos;
 
 public:
   User(/* args */);
@@ -22,24 +23,11 @@ public:
 };
 void User::get_file_data()
 {
-  string path_user_data = utils::get_file_path("../mydata.csv");
-  ifstream user_data_stream(path_user_data);
-  string line;
-  string values[6];
-  while (getline(user_data_stream, line))
-  {
-    if (line == MOVIES_str)
-    {
-      continue;
-    }
-    if (line == SERIES_str)
-    {
-      break;
-    }
-    int i = 0;
-  }
+  utils::get_data_movies(videos, "../mydata.csv");
+  Controller::print_movies(&videos);
 };
 User::User(/* args */)
 {
+  get_file_data();
 }
 #endif
