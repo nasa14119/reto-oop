@@ -7,6 +7,7 @@
 #include "clases/Media.h"
 #include "clases/Controller.cpp"
 #include "clases/Filters.cpp"
+#include "clases/User.cpp"
 using namespace std;
 const string MOVIES_str = "movies";
 const string SERIES_str = "series";
@@ -18,7 +19,6 @@ int main()
 {
   MediaVector media;
   file_setup(media);
-  Controller control(&media);
-  control.print_movies();
+  User user;
   return 0;
 }

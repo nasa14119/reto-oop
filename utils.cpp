@@ -24,14 +24,15 @@ MediaVector utils::get_data_movies(MediaVector &medias, string str)
   ifstream file_movie(path_movies);
   if (!file_movie.is_open())
   {
+    cerr << "File load error" << endl;
     throw "Error reading file";
   }
   while (getline(file_movie, line))
   {
-    if (line == MOVIES_str)
-    {
+    if (line == SERIES_str)
       break;
-    }
+    if (line == MOVIES_str)
+      continue;
     stringstream ss(line);
     int i = 0;
     while (getline(ss, values[i], ','))
@@ -43,3 +44,9 @@ MediaVector utils::get_data_movies(MediaVector &medias, string str)
   file_movie.close();
   return medias;
 };
+void utils::center_text(const string &str, int total_size)
+{
+  int padding = (total_size - str.length()) / 2;
+  (padding % 2 != 0) && padding++;
+  cout << right << setw(padding + str.length()) << str << setw(padding) << "\n";
+}

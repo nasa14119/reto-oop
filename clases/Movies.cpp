@@ -2,6 +2,7 @@
 #define MOVIES
 #include <iostream>
 #include "Media.h"
+#include "../utils.h"
 using namespace std;
 
 class Movies : public Media
@@ -10,7 +11,7 @@ public:
   using Media::Media;
   static void design()
   {
-    cout << setw(30) << "----------Movies----------" << "\n";
+    utils::center_text("----------Movies----------");
     cout << "|" << setw(3) << "ID" << setw(2) << "|";
     cout << setw(15) << "Title" << setw(10) << "|";
     cout << setw(11) << "Gender" << setw(5) << "|";
