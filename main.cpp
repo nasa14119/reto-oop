@@ -21,6 +21,6 @@ int main()
   file_setup(media);
   User user;
   Controller control(&media, &user);
-  control.menu_user();
+  user.print();
   return 0;
 }

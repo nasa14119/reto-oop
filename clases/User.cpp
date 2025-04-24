@@ -5,7 +5,10 @@ User::User()
 {
   get_file_data();
 }
-
+void User::print()
+{
+  cout << User::videos[0]->serialized_data() << endl;
+}
 void User::get_file_data()
 {
   utils::get_data_movies(videos, "../mydata.csv");

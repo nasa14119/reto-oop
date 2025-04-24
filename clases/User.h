@@ -22,6 +22,7 @@ public:
   void rank_movie();
   void rank_serie();
   void save_to_file();
+  void print();
 };
 
 #endif

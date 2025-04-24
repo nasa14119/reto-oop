@@ -30,5 +30,17 @@ public:
     cout << comments;
     cout << endl;
   }
+  string serialized_data()
+  {
+    string data = "";
+    data += (id + ",");
+    data += (title + ",");
+    data += (gender + ",");
+    data += (to_string(duration) + ",");
+    data += (get_score_str() + ",");
+    data += (comments);
+    data += "\n";
+    return data;
+  }
 };
 #endif

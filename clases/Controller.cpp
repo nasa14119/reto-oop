@@ -1,6 +1,7 @@
 #include "Controller.h"
 #include "User.h"
 #include "Movies.cpp"
+using namespace std;
 Controller::Controller(MediaVector *vector_media, User *user) : movies(vector_media), user(user)
 {
 }
