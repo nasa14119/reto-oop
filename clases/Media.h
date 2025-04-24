@@ -15,12 +15,12 @@ protected:
 public:
   Media(std::string const id, std::string const title, std::string const gender, int const duration, float const score, std::string const comments)
   {
-    Media::id = id;
-    Media::title = title;
-    Media::gender = gender;
-    Media::comments = comments;
-    Media::duration = duration;
-    Media::score = score;
+    this->id = id;
+    this->title = title;
+    this->gender = gender;
+    this->comments = comments;
+    this->duration = duration;
+    this->score = score;
   };
   virtual void print() = 0;
   int get_score() { return score; };
