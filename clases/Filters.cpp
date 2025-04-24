@@ -32,7 +32,7 @@ namespace filters
     else
     {
       sort(midias.begin(), midias.end(), [](Media *a, Media *b)
-           { return a->get_score() > b->get_score(); });
+           { return a->get_duration() > b->get_duration(); });
     }
 
     return midias;
