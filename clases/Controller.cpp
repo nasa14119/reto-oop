@@ -21,6 +21,7 @@ public:
     {
       media->print();
     };
+    cout << endl;
   }
   static void print_movies(MediaVector *sorted_movies)
   {
@@ -29,6 +30,7 @@ public:
     {
       media->print();
     };
+    cout << endl;
   }
 };
 #endif
