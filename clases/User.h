@@ -12,7 +12,7 @@ class Controller;
 class User
 {
 private:
-  MediaVector videos;
+  MediaVector movies;
 
 public:
   User();

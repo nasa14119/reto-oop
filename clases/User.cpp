@@ -7,11 +7,10 @@ User::User()
 }
 void User::print()
 {
-  cout << User::videos[0]->serialized_data() << endl;
 }
 void User::get_file_data()
 {
-  utils::get_data_movies(videos, "../mydata.csv");
+  utils::get_data_movies(movies, "../mydata.csv");
 }
 
 void User::save_movie()
@@ -36,5 +35,4 @@ void User::rank_serie()
 
 void User::save_to_file()
 {
-  // Implementación para guardar datos en un archivo
 }
