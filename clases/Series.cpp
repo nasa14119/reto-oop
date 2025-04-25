@@ -61,6 +61,8 @@ void Series::add_serie(Serie *new_serie)
 }
 void Series::add_serie(std::string const id, std::string const title, std::string const gender, int const duration, float const score, std::string const comments)
 {
+  this->duration += duration;
+  this->score = (this->score + score) / 2;
   series.emplace_back(new Serie(id, title, gender, duration, score, comments));
 }
 string Series::serialized_data()
