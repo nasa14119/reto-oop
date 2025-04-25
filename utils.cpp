@@ -89,3 +89,59 @@ void utils::center_text(const string &str, int total_size, string end)
   (padding % 2 != 0) && padding++;
   cout << right << setw(padding + str.length()) << str << setw(padding) << end;
 }
+int utils::get_dato_int(int min, int max)
+{
+  int result;
+  string inp;
+  while (true)
+  {
+    cout << "value(" << min << "," << max << "): ";
+    cin >> inp;
+    try
+    {
+      stoi(inp);
+      result = stoi(inp);
+    }
+    catch (const std::exception &e)
+    {
+      cout << "Error in value type" << "\n";
+      continue;
+    }
+    if (result < min || result > max)
+    {
+      cout << "Value is not an option" << "\n";
+      result = 0;
+      continue;
+    }
+    break;
+  }
+  return result;
+}
+int utils::get_dato_int(int max)
+{
+  int result;
+  string inp;
+  while (true)
+  {
+    cout << "value(1," << max << "): ";
+    cin >> inp;
+    try
+    {
+      stoi(inp);
+      result = stoi(inp);
+    }
+    catch (const std::exception &e)
+    {
+      cout << "Error in value type" << "\n";
+      continue;
+    }
+    if (result < 1 || result > max)
+    {
+      cout << "Value is not an option" << "\n";
+      result = 0;
+      continue;
+    }
+    break;
+  }
+  return result;
+}

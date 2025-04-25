@@ -14,5 +14,7 @@ public:
   static MediaVector get_data_movies(MediaVector &, string);
   static MediaVector get_data_series(MediaVector &, string);
   static void center_text(const string &, int = 85, string = "\n");
+  static int get_dato_int(int, int);
+  static int get_dato_int(int);
 };
 #endif
