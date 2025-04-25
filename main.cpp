@@ -12,14 +12,16 @@
 using namespace std;
 const string MOVIES_str = "movies";
 const string SERIES_str = "series";
-void file_setup(MediaVector &media)
+void file_setup(MediaVector &media, MediaVector &series)
 {
   utils::get_data_movies(media, "../movies.csv");
+  utils::get_data_series(series, "../series.csv");
 };
 int main()
 {
   MediaVector media;
-  file_setup(media);
+  MediaVector series;
+  file_setup(media, series);
   User user;
   Controller control(&media, &user);
   return 0;

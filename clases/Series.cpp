@@ -3,16 +3,6 @@
 #include <iostream>
 #include "../utils.h"
 using namespace std;
-void Serie::print()
-{
-  cout << "|" << left << setw(4) << string(4, ' ') << "|";
-  cout << left << setw(24) << title << "|";
-  cout << setw(15) << " " + gender << "|";
-  cout << setw(13) << to_string(duration) + " min" << "|";
-  utils::center_text(get_score_str(), 8, "|");
-  cout << comments;
-  cout << endl;
-};
 string Serie::serialized_data()
 {
   string data = "";
@@ -25,27 +15,44 @@ string Serie::serialized_data()
   data += "\n";
   return data;
 };
+void Serie::print()
+{
+  cout << "|" << left << setw(4) << string(4, ' ') << "|";
+  cout << left << setw(32) << title << "|";
+  cout << setw(9) << " " + gender << "|";
+  cout << setw(9) << to_string(duration) + " min" << "|";
+  cout << setw(4) << get_score_str() << "|";
+  cout << comments;
+  cout << endl;
+};
 void Series::design()
 {
   utils::center_text("--------Series--------");
   cout << "|" << setw(3) << "ID" << setw(2) << "|";
-  cout << setw(15) << "Chapter" << setw(10) << "|";
-  cout << setw(11) << "Genere" << setw(5) << "|";
-  cout << setw(11) << "Duration" << setw(3) << "|";
-  cout << "  Score |";
-  cout << setw(14) << "Comments...";
+  cout << left << setw(32) << "Chapter" << "|";
+  cout << left << setw(9) << "Genre" << "|";
+  cout << left << setw(9) << "Duration" << "|";
+  cout << left << setw(4) << "Rank" << "|";
+  cout << left << setw(14) << "Comments...";
   cout << "\n";
   cout << endl;
 }
 void Series::print()
 {
-  const string id_str = ("----------" + id) + "----------";
+  const string id_str = ("----------" + id) + "---------";
   utils::center_text(id_str);
   cout << "|" << left << setw(4) << id << "|";
-  cout << left << setw(24) << " " << "|";
-  cout << setw(15) << " " + gender << "|";
-  cout << setw(13) << to_string(duration) + " min" << "|";
-  utils::center_text(get_score_str(), 8, "|");
+  // Espacio en blanco donde van los capitulos
+  cout << left << setw(32) << " " << "|";
+  cout << setw(9) << " " + gender << "|";
+  cout << setw(9) << to_string(duration) + " min" << "|";
+  cout << get_score_str();
+  cout << "\n";
+  cout << "|" << string(82, '-') << "|" << "\n";
+  for (Serie *value : series)
+  {
+    value->print();
+  }
   cout << endl;
 }
 void Series::add_serie(Serie *new_serie)

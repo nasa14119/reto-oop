@@ -4,6 +4,7 @@
 #include <sstream>
 #include "utils.h"
 #include "clases/Movies.cpp"
+#include "clases/Series.h"
 using namespace std;
 extern const string MOVIES_str;
 extern const string SERIES_str;
@@ -42,6 +43,44 @@ MediaVector utils::get_data_movies(MediaVector &medias, string str)
     medias.emplace_back(new Movies(values[0], values[1], values[2], stoi(values[3]), stof(values[4]), values[5]));
   }
   file_movie.close();
+  return medias;
+};
+MediaVector utils::get_data_series(MediaVector &medias, string str)
+{
+  string path_series = utils::get_file_path(str);
+  string values[6];
+  string line;
+  string id;
+  ifstream file_series(path_series);
+  if (!file_series.is_open())
+  {
+    cerr << "File load error" << endl;
+    throw "Error reading file";
+  }
+  while (getline(file_series, line))
+  {
+    stringstream ss(line);
+    int i = 0;
+    while (getline(ss, values[i], ','))
+    {
+      i++;
+    }
+    Series *series_back = nullptr;
+    if (!medias.empty())
+    {
+      series_back = dynamic_cast<Series *>(medias.back());
+    }
+    if (values[0] != id)
+    {
+      id = values[0];
+      medias.emplace_back(new Series(values[0], values[1], values[2], stoi(values[3]), stof(values[4]), values[5]));
+      series_back = dynamic_cast<Series *>(medias.back());
+      series_back->add_serie(values[0], values[1], values[2], stoi(values[3]), stof(values[4]), values[5]);
+      continue;
+    }
+    series_back->add_serie(values[0], values[1], values[2], stoi(values[3]), stof(values[4]), values[5]);
+  }
+  file_series.close();
   return medias;
 };
 void utils::center_text(const string &str, int total_size, string end)

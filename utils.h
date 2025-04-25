@@ -12,6 +12,7 @@ public:
   static string get_file_path(string str);
   static void clear();
   static MediaVector get_data_movies(MediaVector &, string);
+  static MediaVector get_data_series(MediaVector &, string);
   static void center_text(const string &, int = 85, string = "\n");
 };
 #endif
