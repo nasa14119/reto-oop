@@ -8,6 +8,7 @@
 #include "clases/Controller.h"
 #include "clases/Filters.cpp"
 #include "clases/User.h"
+#include "clases/Series.h"
 using namespace std;
 const string MOVIES_str = "movies";
 const string SERIES_str = "series";
@@ -21,6 +22,5 @@ int main()
   file_setup(media);
   User user;
   Controller control(&media, &user);
-  user.print();
   return 0;
 }
