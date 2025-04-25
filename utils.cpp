@@ -44,9 +44,9 @@ MediaVector utils::get_data_movies(MediaVector &medias, string str)
   file_movie.close();
   return medias;
 };
-void utils::center_text(const string &str, int total_size)
+void utils::center_text(const string &str, int total_size, string end)
 {
   int padding = (total_size - str.length()) / 2;
   (padding % 2 != 0) && padding++;
-  cout << right << setw(padding + str.length()) << str << setw(padding) << "\n";
+  cout << right << setw(padding + str.length()) << str << setw(padding) << end;
 }
