@@ -25,6 +25,33 @@ void Controller::menu_user()
   std::cout << "4. Rank Serie" << "\n";
 }
 
+Media * Controller::get_index_movies(){
+  utils::clear(); 
+  int i = 1; 
+  for (Media *media : (*movies)){
+    cout<<i<<"."; 
+    media->print();
+    i++; 
+  }
+  cout<<"Which one of these would you like to save?"<<"\n"; 
+  int answer; 
+  cin>>answer; 
+  return movies->at(answer); 
+}
+Media * Controller::get_index_series(){
+  utils::clear(); 
+  int i = 1; 
+  for (Media *media : (*series)){
+    cout<<i<<"."; 
+    media->print();
+    i++; 
+  }
+  cout<<"Which one of these would you like to save?"<<"\n"; 
+  int answer; 
+  cin>>answer; 
+  return series->at(answer); 
+}
+
 void Controller::print_movies(MediaVector *sorted_movies)
 {
   Movies::design();
