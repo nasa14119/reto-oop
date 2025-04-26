@@ -23,6 +23,7 @@ int main()
   MediaVector series;
   file_setup(media, series);
   User user;
-  Controller control(&media, &user);
+  Controller control(&media, &series, &user);
+  control.menu();
   return 0;
 }

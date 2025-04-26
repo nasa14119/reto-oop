@@ -15,6 +15,7 @@ string utils::get_file_path(string str)
 };
 void utils::clear()
 {
+  system("clear");
   cout << "\033[2J\033[H" << flush;
 };
 MediaVector utils::get_data_movies(MediaVector &medias, string str)
@@ -144,4 +145,10 @@ int utils::get_dato_int(int max)
     break;
   }
   return result;
+}
+void utils::await_enter()
+{
+  std::cin.clear();
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  std::cin.get();
 }

@@ -16,5 +16,6 @@ public:
   static void center_text(const string &, int = 85, string = "\n");
   static int get_dato_int(int, int);
   static int get_dato_int(int);
+  static void await_enter();
 };
 #endif

@@ -12,13 +12,18 @@ class Controller
 {
 private:
   MediaVector *movies;
+  MediaVector *series;
   User *user;
 
 public:
-  Controller(MediaVector *vector_media, User *user);
+  Controller(MediaVector *vector_movies, MediaVector *vector_series, User *user);
   void print_movies();
+  void print_series();
   void menu_user();
-  static void print_movies(MediaVector *sorted_movies);
+  void menu();
+  void print_filter_by();
+  static void print_movies(MediaVector *);
+  static void print_series(MediaVector *);
 };
 
 #endif

@@ -23,5 +23,7 @@ public:
   static void design();
   void print();
   string serialized_data();
+  SeriesVector get_series() { return series; };
+  void set_series(SeriesVector series) { this->series = series; };
 };
 #endif
