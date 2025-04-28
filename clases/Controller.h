@@ -26,7 +26,6 @@ public:
   static void print_series(MediaVector *);
   Media *get_index_movies();
   Media *get_index_series();
-  static void print_movies(MediaVector *sorted_movies);
 };
 
 #endif

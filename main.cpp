@@ -9,9 +9,8 @@
 #include "clases/Filters.cpp"
 #include "clases/User.h"
 #include "clases/Series.h"
+#include "const.h"
 using namespace std;
-const string MOVIES_str = "movies";
-const string SERIES_str = "series";
 void file_setup(MediaVector &media, MediaVector &series)
 {
   utils::get_data_movies(media, "../movies.csv");
@@ -24,6 +23,8 @@ int main()
   file_setup(media, series);
   User user;
   Controller control(&media, &series, &user);
-  control.menu();
+  // control.menu();
+  user.save_movie(media[0]);
+  user.save_serie(series[5]);
   return 0;
 }

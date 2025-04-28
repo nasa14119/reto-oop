@@ -1,3 +1,6 @@
+#include <iostream>
+const std::string MOVIES_str = "movies";
+const std::string SERIES_str = "series";
 enum MENU_USER
 {
   DISPLAY_ALL = 1,

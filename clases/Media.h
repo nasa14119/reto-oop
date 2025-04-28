@@ -41,5 +41,6 @@ public:
   std::string get_gender() { return gender; };
   std::string get_title() { return title; };
   virtual std::string serialized_data() = 0;
+  void set_score(float score) { this->score = score; };
 };
 #endif

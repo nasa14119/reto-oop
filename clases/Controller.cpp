@@ -3,7 +3,6 @@
 #include "Movies.cpp"
 #include "Series.h"
 #include "Filters.h"
-#include "../const.h"
 using namespace std;
 Controller::Controller(MediaVector *vector_movies, MediaVector *vector_series, User *user) : movies(vector_movies), user(user), series(vector_series)
 {
@@ -56,31 +55,35 @@ void Controller::menu_user()
   std::cout << std::endl;
 }
 
-Media * Controller::get_index_movies(){
-  utils::clear(); 
-  int i = 1; 
-  for (Media *media : (*movies)){
-    cout<<i<<"."; 
+Media *Controller::get_index_movies()
+{
+  utils::clear();
+  int i = 1;
+  for (Media *media : (*movies))
+  {
+    cout << i << ".";
     media->print();
-    i++; 
+    i++;
   }
-  cout<<"Which one of these would you like to save?"<<"\n"; 
-  int answer; 
-  cin>>answer; 
-  return movies->at(answer); 
+  cout << "Which one of these would you like to save?" << "\n";
+  int answer;
+  cin >> answer;
+  return movies->at(answer);
 }
-Media * Controller::get_index_series(){
-  utils::clear(); 
-  int i = 1; 
-  for (Media *media : (*series)){
-    cout<<i<<"."; 
+Media *Controller::get_index_series()
+{
+  utils::clear();
+  int i = 1;
+  for (Media *media : (*series))
+  {
+    cout << i << ".";
     media->print();
-    i++; 
+    i++;
   }
-  cout<<"Which one of these would you like to save?"<<"\n"; 
-  int answer; 
-  cin>>answer; 
-  return series->at(answer); 
+  cout << "Which one of these would you like to save?" << "\n";
+  int answer;
+  cin >> answer;
+  return series->at(answer);
 }
 
 void Controller::print_movies(MediaVector *sorted_movies)
@@ -184,5 +187,4 @@ void Controller::menu()
   if (inp == 4 || inp == 6)
     print_series(&filterSeries);
   utils::await_enter();
-  utils::clear();
 }
