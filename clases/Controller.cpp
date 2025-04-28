@@ -135,21 +135,27 @@ void Controller::menu()
       filterMovies = filters::filter_by_duration(*movies, is_deseindig);
     if (inp == 4 || inp == 6)
       filterSeries = filters::filter_by_duration(*series, is_deseindig);
+    break;
   case 3:
     if (inp == 4 || inp == 5)
       filterMovies = filters::filter_by_gender(*movies, is_deseindig);
     if (inp == 4 || inp == 6)
       filterSeries = filters::filter_by_gender(*series, is_deseindig);
+    break;
   case 4:
     if (inp == 4 || inp == 5)
       filterMovies = filters::filter_by_title(*movies, is_deseindig);
     if (inp == 4 || inp == 6)
       filterSeries = filters::filter_by_series_alpha(*series, is_deseindig);
+    break;
   default:
     break;
   }
+  utils::clear();
   if (inp == 4 || inp == 5)
     print_movies(&filterMovies);
   if (inp == 4 || inp == 6)
     print_series(&filterSeries);
+  utils::await_enter();
+  utils::clear();
 }
