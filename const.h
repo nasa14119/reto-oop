@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 const std::string MOVIES_str = "movies";
 const std::string SERIES_str = "series";
@@ -6,6 +7,8 @@ enum MENU_USER
   DISPLAY_ALL = 1,
   DISPLAY_MOVIES,
   DISPLAY_SERIES,
+  MOVIES_EDIT,
+  SERIES_EDIT,
   MOVIES_SAVE,
   MOVIES_RANK,
   MOVIES_DELETE,

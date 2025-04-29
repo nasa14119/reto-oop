@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 #include "Media.h"
-
+#include "../const.h"
 // Declaración adelantada de Controller
 class Controller;
 
@@ -23,7 +23,7 @@ public:
   void rank_movie(Media *);
   void rank_serie(Media *);
   void save_to_file();
-  void print();
+  void print(MENU_USER);
   ~User();
 };
 

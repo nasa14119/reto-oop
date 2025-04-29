@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <fstream>
 #include "clases/Media.h"
+#include "const.h"
 using namespace std;
 extern const string MOVIES_str;
 extern const string SERIES_str;

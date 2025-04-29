@@ -4,6 +4,7 @@
 #include "Series.h"
 #include "Filters.h"
 using namespace std;
+#include "../const.h"
 Controller::Controller(MediaVector *vector_movies, MediaVector *vector_series, User *user) : movies(vector_movies), user(user), series(vector_series)
 {
 }
@@ -29,6 +30,7 @@ void Controller::print_series()
 void Controller::menu_user()
 {
   utils::clear();
+  std::cout << "My Data" << "\n";
   std::cout << "1. Display All" << "\n";
   std::cout << "2. Display my movies" << "\n";
   std::cout << "3. Display my series" << "\n";
@@ -36,22 +38,33 @@ void Controller::menu_user()
   std::cout << "5. Edit my series" << "\n";
   int inp = utils::get_dato_int(5);
   utils::clear();
-  if (inp == 4)
+  if (inp == MOVIES_EDIT)
   {
     std::cout << "1. Save new movie" << "\n";
     std::cout << "2. Delete a movie" << "\n";
     std::cout << "3. Rank a movie" << "\n";
     std::cout << "4. Comment movie" << "\n";
-    utils::get_dato_int(4);
+    int opt = MOVIES_EDIT + utils::get_dato_int(4);
     utils::clear();
+    return;
   }
-  if (inp == 5)
+  if (inp == SERIES_EDIT)
   {
     std::cout << "1. Save new Serie" << "\n";
     std::cout << "2. Delete serie" << "\n";
     std::cout << "3. Rank a serie" << "\n";
     std::cout << "4. Comment a serie" << "\n";
+    int opt = SERIES_EDIT + utils::get_dato_int(4);
+    utils::clear();
+    return;
   }
+  if (inp != DISPLAY_SERIES)
+    print_movies();
+  if (inp != DISPLAY_MOVIES)
+    print_series();
+  utils::await_enter();
+  utils::clear();
+  return;
   std::cout << std::endl;
 }
 
@@ -163,13 +176,14 @@ void Controller::menu()
   std::cout << "4. Print all by" << "\n";
   std::cout << "5. Print movies by" << "\n";
   std::cout << "6. Print series by" << "\n";
-  const int inp = utils::get_dato_int(6);
+  std::cout << "7. Login as user" << "\n";
+  const int inp = utils::get_dato_int(7);
   utils::clear();
   if (inp < 4)
   {
-    if (inp == 1 || inp == 2)
+    if (inp == DISPLAY_ALL || inp == DISPLAY_MOVIES)
       print_movies();
-    if (inp == 1 || inp == 3)
+    if (inp == DISPLAY_ALL || inp == DISPLAY_SERIES)
       print_series();
     utils::await_enter();
     utils::clear();
@@ -181,4 +195,5 @@ void Controller::menu()
     print_filter_by(inp);
     return;
   }
+  menu_user();
 }

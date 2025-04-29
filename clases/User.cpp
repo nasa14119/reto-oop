@@ -1,15 +1,21 @@
 #include <fstream>
 #include "User.h"
 #include "Controller.h" // Incluye Controller solo en el archivo fuente
-
+#include "../const.h"
 User::User()
 {
   get_file_data();
 }
-void User::print()
+void User::print(MENU_USER option)
 {
-  Controller::print_movies(&movies);
-  // Controller::print_series(series);
+  if (MENU_USER::DISPLAY_ALL || MENU_USER::DISPLAY_MOVIES)
+  {
+    Controller::print_movies(&movies);
+  }
+  if (MENU_USER::DISPLAY_ALL || MENU_USER::DISPLAY_SERIES)
+  {
+    Controller::print_movies(&movies);
+  }
 }
 void User::get_file_data()
 {
