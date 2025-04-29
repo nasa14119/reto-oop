@@ -8,13 +8,13 @@ User::User()
 }
 void User::print(MENU_USER option)
 {
-  if (MENU_USER::DISPLAY_ALL || MENU_USER::DISPLAY_MOVIES)
+  if (option == MENU_USER::DISPLAY_ALL || option == MENU_USER::DISPLAY_MOVIES)
   {
     Controller::print_movies(&movies);
   }
-  if (MENU_USER::DISPLAY_ALL || MENU_USER::DISPLAY_SERIES)
+  if (option == MENU_USER::DISPLAY_ALL || option == MENU_USER::DISPLAY_SERIES)
   {
-    Controller::print_movies(&movies);
+    Controller::print_series(&series);
   }
 }
 void User::get_file_data()

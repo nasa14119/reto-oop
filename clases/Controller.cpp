@@ -27,7 +27,7 @@ void Controller::print_series()
   };
   std::cout << std::endl;
 }
-void Controller::menu_user()
+bool Controller::menu_user()
 {
   utils::clear();
   std::cout << "My Data" << "\n";
@@ -37,6 +37,8 @@ void Controller::menu_user()
   std::cout << "4. Edit my movies" << "\n";
   std::cout << "5. Edit my series" << "\n";
   int inp = utils::get_dato_int(5);
+  if (inp < 0)
+    return false;
   utils::clear();
   if (inp == MOVIES_EDIT)
   {
@@ -53,7 +55,7 @@ void Controller::menu_user()
       user->search_movie(*movies);
     }
     utils::clear();
-    return;
+    return true;
   }
   if (inp == SERIES_EDIT)
   {
@@ -63,16 +65,13 @@ void Controller::menu_user()
     std::cout << "4. Comment a serie" << "\n";
     int opt = SERIES_EDIT + utils::get_dato_int(4);
     utils::clear();
-    return;
+    return true;
   }
-  if (inp != DISPLAY_SERIES)
-    print_movies();
-  if (inp != DISPLAY_MOVIES)
-    print_series();
+  user->print((MENU_USER)inp);
   utils::await_enter();
   utils::clear();
-  return;
   std::cout << std::endl;
+  return true;
 }
 
 Media *Controller::get_index_movies()
@@ -130,6 +129,8 @@ void Controller::print_filter_by(const int &inp)
   cout << "Desending(y): ";
   cin.ignore();
   getline(cin, inp_2);
+  if (inp_2 == "q")
+    exit(0);
   bool is_deseindig = (inp_2 != "n");
   cout << "1. By Score" << "\n";
   cout << "2. By Duration" << "\n";
@@ -177,6 +178,7 @@ void Controller::print_filter_by(const int &inp)
 }
 void Controller::menu()
 {
+  std::cout << "Main Menu" << "\n";
   std::cout << "1. Print all" << "\n";
   std::cout << "2. Print movies" << "\n";
   std::cout << "3. Print series" << "\n";
@@ -186,21 +188,27 @@ void Controller::menu()
   std::cout << "7. Login as user" << "\n";
   const int inp = utils::get_dato_int(7);
   utils::clear();
-  if (inp < 4)
+  if (inp == 7)
   {
-    if (inp == DISPLAY_ALL || inp == DISPLAY_MOVIES)
-      print_movies();
-    if (inp == DISPLAY_ALL || inp == DISPLAY_SERIES)
-      print_series();
-    utils::await_enter();
+    bool is_runnig = true;
+    while (is_runnig)
+    {
+      is_runnig = menu_user();
+    }
     utils::clear();
     return;
   }
-  if (inp < 7)
+
+  if (inp > 3)
   {
     utils::clear();
     print_filter_by(inp);
     return;
   }
-  menu_user();
+  if (inp != DISPLAY_SERIES)
+    print_movies();
+  if (inp != DISPLAY_MOVIES)
+    print_series();
+  utils::await_enter();
+  utils::clear();
 }

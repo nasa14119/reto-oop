@@ -19,7 +19,7 @@ public:
   Controller(MediaVector *vector_movies, MediaVector *vector_series, User *user);
   void print_movies();
   void print_series();
-  void menu_user();
+  bool menu_user();
   void menu();
   void print_filter_by(const int &);
   static void print_movies(MediaVector *);

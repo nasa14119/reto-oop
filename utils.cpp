@@ -184,6 +184,8 @@ int utils::get_dato_int(int max)
     cin >> inp;
     if (inp == "q")
       exit(0);
+    if (inp == "..")
+      return -1;
     try
     {
       stoi(inp);
@@ -208,6 +210,7 @@ void utils::await_enter()
 {
   std::cin.clear();
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-  std::cin.get();
+  if (cin.get() == 'q')
+    exit(0);
   clear();
 }
