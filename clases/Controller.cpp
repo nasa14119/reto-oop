@@ -141,14 +141,14 @@ void Controller::menu()
   }
   utils::clear();
   std::string inp_2;
-  cout << "Desending(y): ";
+  cout << "Descending(y): ";
   cin.ignore();
   getline(cin, inp_2);
   bool is_deseindig = (inp_2 != "n");
   cout << "1. By Score" << "\n";
   cout << "2. By Duration" << "\n";
   cout << "3. By Genre" << "\n";
-  cout << "4. By Alphabetcially" << "\n";
+  cout << "4. Alphabetically" << "\n";
   int opt = utils::get_dato_int(4);
   MediaVector filterMovies;
   MediaVector filterSeries;
