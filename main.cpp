@@ -23,8 +23,9 @@ int main()
   file_setup(media, series);
   User user;
   Controller control(&media, &series, &user);
-  // control.menu();
-  user.save_movie(media[0]);
-  user.save_serie(series[5]);
+  while (true)
+  {
+    control.menu();
+  }
   return 0;
 }

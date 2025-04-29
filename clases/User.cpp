@@ -9,15 +9,7 @@ User::User()
 void User::print()
 {
   Controller::print_movies(&movies);
-  Controller::print_series(&series);
-  // for (int i = 0; i < movies.size(); i++)
-  // {
-  //   movies[i]->print();
-  // }
-  // for (int i = 0; i < series.size(); i++)
-  // {
-  //   series[i]->print();
-  // }
+  // Controller::print_series(series);
 }
 void User::get_file_data()
 {
@@ -25,7 +17,10 @@ void User::get_file_data()
   ifstream series_part = utils::get_data_movies("../mydata.csv");
   utils::get_data_series(series_part, series);
 }
-
+User::~User()
+{
+  save_to_file();
+};
 void User::save_movie(Media *movie)
 {
   this->movies.push_back(movie);

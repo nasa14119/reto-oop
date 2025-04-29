@@ -24,6 +24,7 @@ public:
   void rank_serie(Media *);
   void save_to_file();
   void print();
+  ~User();
 };
 
 #endif

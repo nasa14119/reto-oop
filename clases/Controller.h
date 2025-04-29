@@ -21,7 +21,7 @@ public:
   void print_series();
   void menu_user();
   void menu();
-  void print_filter_by();
+  void print_filter_by(const int &);
   static void print_movies(MediaVector *);
   static void print_series(MediaVector *);
   Media *get_index_movies();

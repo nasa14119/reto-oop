@@ -181,6 +181,8 @@ int utils::get_dato_int(int max)
   {
     cout << "value(1," << max << "): ";
     cin >> inp;
+    if (inp == "q")
+      exit(0);
     try
     {
       stoi(inp);

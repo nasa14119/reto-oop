@@ -98,48 +98,14 @@ void Controller::print_movies(MediaVector *sorted_movies)
 void Controller::print_series(MediaVector *sorted_series)
 {
   Series::design();
-  for (Media *media : (*sorted_series))
+  for (Media *media : *sorted_series)
   {
     media->print();
   };
   std::cout << std::endl;
 }
-void Controller::print_filter_by()
+void Controller::print_filter_by(const int &inp)
 {
-}
-void Controller::menu()
-{
-  std::cout << "1. Print all" << "\n";
-  std::cout << "2. Print movies" << "\n";
-  std::cout << "3. Print series" << "\n";
-  std::cout << "4. Print all by" << "\n";
-  std::cout << "5. Print movies by" << "\n";
-  std::cout << "6. Print series by" << "\n";
-  const int inp = utils::get_dato_int(6);
-  utils::clear();
-  if (inp == 1)
-  {
-    print_movies();
-    print_series();
-    utils::await_enter();
-    utils::clear();
-    return;
-  }
-  if (inp == 2)
-  {
-    print_movies();
-    utils::await_enter();
-    utils::clear();
-    return;
-  }
-  if (inp == 3)
-  {
-    print_series();
-    utils::await_enter();
-    utils::clear();
-    return;
-  }
-  utils::clear();
   std::string inp_2;
   cout << "Desending(y): ";
   cin.ignore();
@@ -150,8 +116,8 @@ void Controller::menu()
   cout << "3. By Genre" << "\n";
   cout << "4. By Alphabetcially" << "\n";
   int opt = utils::get_dato_int(4);
-  MediaVector filterMovies;
   MediaVector filterSeries;
+  MediaVector filterMovies;
   switch (opt)
   {
   case 1:
@@ -186,5 +152,33 @@ void Controller::menu()
     print_movies(&filterMovies);
   if (inp == 4 || inp == 6)
     print_series(&filterSeries);
+  ;
   utils::await_enter();
+}
+void Controller::menu()
+{
+  std::cout << "1. Print all" << "\n";
+  std::cout << "2. Print movies" << "\n";
+  std::cout << "3. Print series" << "\n";
+  std::cout << "4. Print all by" << "\n";
+  std::cout << "5. Print movies by" << "\n";
+  std::cout << "6. Print series by" << "\n";
+  const int inp = utils::get_dato_int(6);
+  utils::clear();
+  if (inp < 4)
+  {
+    if (inp == 1 || inp == 2)
+      print_movies();
+    if (inp == 1 || inp == 3)
+      print_series();
+    utils::await_enter();
+    utils::clear();
+    return;
+  }
+  if (inp < 7)
+  {
+    utils::clear();
+    print_filter_by(inp);
+    return;
+  }
 }

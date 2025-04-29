@@ -23,20 +23,14 @@ public:
     this->score = score;
   };
   virtual void print() = 0;
-  int get_score() { return score; };
-  float get_duration() { return duration; };
+  float get_score() { return score; };
+  std::string get_id() { return id; };
+  int get_duration() { return duration; };
   std::string get_score_str()
   {
     std::ostringstream out;
-    out << std::fixed << std::setprecision(0) << score;
-    std::string res = out.str();
-    int decimal = static_cast<int>(score * 10) % 10;
-    if (decimal > 0)
-    {
-      res += ".";
-      res += std::to_string(decimal);
-    }
-    return res;
+    out << std::fixed << std::setprecision(1) << score; // Mantén 1 decimal siempre
+    return out.str();
   };
   std::string get_gender() { return gender; };
   std::string get_title() { return title; };
