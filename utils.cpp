@@ -214,3 +214,14 @@ void utils::await_enter()
     exit(0);
   clear();
 }
+bool utils::confirmation()
+{
+  cout << "Are you sure you whant to continue with this action (y/n)?:" << "\n";
+  string inp;
+  while (inp != "n" && inp != "y")
+  {
+    getline(cin, inp);
+  }
+  clear();
+  return inp == "y";
+}

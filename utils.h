@@ -21,5 +21,6 @@ public:
   static int get_dato_int(int, int);
   static int get_dato_int(int);
   static void await_enter();
+  static bool confirmation();
 };
 #endif
