@@ -33,7 +33,43 @@ void User::save_movie(Media *movie)
   // Implementación para guardar una película
   save_to_file();
 }
-
+void User::save_movie()
+{
+}
+Media *User::search_movie(MediaVector source_movies)
+{
+  MediaVector results;
+  while (results.size() != 1)
+  {
+    cout << "Enter id or the movie's name: ";
+    string inp;
+    getline(cin, inp);
+    utils::clear();
+    results.clear();
+    for (Media *movie : source_movies)
+    {
+      const string id = (movie->get_id()).substr(0, inp.length());
+      if (inp.length() <= 3 && inp == id)
+      {
+        results.push_back(movie);
+        movie->print();
+        continue;
+      }
+      string check = (movie->get_title()).substr(0, inp.length());
+      if (check == inp)
+      {
+        results.push_back(movie);
+        movie->print();
+      }
+    }
+    if (results.empty())
+    {
+      cout << "No movie found try again\n";
+      results.clear();
+    }
+  }
+  return results[0];
+}
 void User::save_serie(Media *serie)
 {
   this->series.push_back(serie);

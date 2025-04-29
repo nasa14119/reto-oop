@@ -19,6 +19,8 @@ public:
   User();
   void get_file_data();
   void save_movie(Media *);
+  void save_movie();
+  Media *search_movie(MediaVector);
   void save_serie(Media *);
   void rank_movie(Media *);
   void rank_serie(Media *);

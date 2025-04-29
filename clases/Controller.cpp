@@ -44,7 +44,14 @@ void Controller::menu_user()
     std::cout << "2. Delete a movie" << "\n";
     std::cout << "3. Rank a movie" << "\n";
     std::cout << "4. Comment movie" << "\n";
-    int opt = MOVIES_EDIT + utils::get_dato_int(4);
+    int opt = MOVIES_NEW + (utils::get_dato_int(4) - 1);
+    cout << opt << " : " << MOVIES_NEW;
+    if (opt == MOVIES_NEW)
+    {
+      utils::clear();
+      print_movies();
+      user->search_movie(*movies);
+    }
     utils::clear();
     return;
   }
