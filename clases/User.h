@@ -25,6 +25,8 @@ public:
   void save_movie(MediaVector *);
   void delete_movie(Media *);
   void delete_movie();
+  void delete_series(Media *);
+  void delete_series();
   Media *search_movie(MediaVector, bool = true);
   Media *search_serie(MediaVector, bool = true);
   void save_serie(Media *);

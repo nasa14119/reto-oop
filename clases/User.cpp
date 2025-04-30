@@ -96,6 +96,33 @@ void User::delete_movie(Media *errase)
   }
   save_to_file();
 }
+void User::delete_series()
+{
+  cin.ignore();
+  Media *deleting = search_movie(series, false);
+  utils::clear();
+  cout << "Your are tring to delete this serie:" << "\n";
+  deleting->print();
+  if (!utils::confirmation())
+  {
+    return;
+  }
+  delete_movie(deleting);
+}
+void User::delete_series(Media *errase)
+{
+  const string errase_id = errase->get_id();
+  for (int i = 0; i < series.size(); ++i)
+  {
+    Media *element = movies[i];
+    if (element->get_id() == errase_id)
+    {
+      movies.erase(series.begin() + i);
+      break;
+    }
+  }
+  save_to_file();
+}
 Media *User::search_movie(MediaVector source_movies, bool only_new)
 {
   if (source_movies.empty())

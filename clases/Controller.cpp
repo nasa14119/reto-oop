@@ -48,15 +48,17 @@ bool Controller::menu_user()
     std::cout << "4. Comment movie" << "\n";
     int opt = MOVIES_NEW + (utils::get_dato_int(4) - 1);
     cout << opt << " : " << MOVIES_NEW;
-    if (opt == MOVIES_NEW)
+    utils::clear();
+    switch (opt)
     {
-      utils::clear();
+    case MOVIES_NEW:
       user->save_movie(movies);
-    }
-    if (opt == MOVIES_DELETE)
-    {
-      utils::clear();
+      break;
+    case MOVIES_DELETE:
       user->delete_movie();
+      break;
+    default:
+      break;
     }
     utils::clear();
     return true;
@@ -68,10 +70,17 @@ bool Controller::menu_user()
     std::cout << "3. Rank a serie" << "\n";
     std::cout << "4. Comment a serie" << "\n";
     int opt = SERIES_NEW + (utils::get_dato_int(4) - 1);
-    if (opt == SERIES_NEW)
+    utils::clear();
+    switch (opt)
     {
-      utils::clear();
+    case SERIES_NEW:
       user->save_serie(series);
+      break;
+    case SERIES_DELETE:
+      user->delete_series();
+      break;
+    default:
+      break;
     }
     utils::clear();
     return true;
