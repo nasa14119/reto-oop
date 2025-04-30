@@ -51,8 +51,12 @@ bool Controller::menu_user()
     if (opt == MOVIES_NEW)
     {
       utils::clear();
-      print_movies();
-      user->search_movie(*movies);
+      user->save_movie(movies);
+    }
+    if (opt == MOVIES_DELETE)
+    {
+      utils::clear();
+      user->delete_movie();
     }
     utils::clear();
     return true;
@@ -67,8 +71,7 @@ bool Controller::menu_user()
     if (opt == SERIES_NEW)
     {
       utils::clear();
-      print_series();
-      user->search_serie(*series);
+      user->save_serie(series);
     }
     utils::clear();
     return true;
@@ -129,7 +132,7 @@ void Controller::print_series(MediaVector *sorted_series)
   };
   std::cout << std::endl;
 }
-void Controller::print_filter_by(const int &inp)
+MediaVector Controller::get_filter_vector(MediaVector medias, FILTERS inp = MOVIES_OPT)
 {
   std::string inp_2;
   cout << "Desending(y): ";
@@ -142,42 +145,85 @@ void Controller::print_filter_by(const int &inp)
   cout << "2. By Duration" << "\n";
   cout << "3. By Genre" << "\n";
   cout << "4. By Alphabetcially" << "\n";
-  int opt = utils::get_dato_int(4);
+  int opt = FILTERS::SCORE + (utils::get_dato_int(4) - 1);
+  MediaVector filterVector;
+  switch (opt)
+  {
+  case FILTERS::SCORE:
+    filterVector = filters::filter_by_score(medias, is_deseindig);
+    break;
+
+  case FILTERS::DURATION:
+    filterVector = filters::filter_by_duration(medias, is_deseindig);
+    break;
+
+  case FILTERS::GENRE:
+    filterVector = filters::filter_by_gender(medias, is_deseindig);
+    break;
+  case FILTERS::ALPHABETICALLY:
+    if (inp != FILTERS::MOVIES_OPT)
+    {
+      filterVector = filters::filter_by_series_alpha(medias, is_deseindig);
+    }
+    else
+    {
+      filterVector = filters::filter_by_title(medias, is_deseindig);
+    }
+    break;
+  default:
+    break;
+  }
+  return filterVector;
+};
+void Controller::print_filter_by(const int inp)
+{
+  std::string inp_2;
+  cout << "Desending(y): ";
+  cin.ignore();
+  getline(cin, inp_2);
+  if (inp_2 == "q")
+    exit(0);
+  bool is_deseindig = (inp_2 != "n");
+  cout << "1. By Score" << "\n";
+  cout << "2. By Duration" << "\n";
+  cout << "3. By Genre" << "\n";
+  cout << "4. By Alphabetcially" << "\n";
+  int opt = FILTERS::SCORE + (utils::get_dato_int(4) - 1);
   MediaVector filterSeries;
   MediaVector filterMovies;
   switch (opt)
   {
-  case 1:
-    if (inp == 4 || inp == 5)
+  case FILTERS::SCORE:
+    if (inp == FILTERS::ALL || inp == FILTERS::MOVIES_OPT)
       filterMovies = filters::filter_by_score(*movies, is_deseindig);
-    if (inp == 4 || inp == 6)
+    if (inp == FILTERS::ALL || inp == FILTERS::SERIES_OPT)
       filterSeries = filters::filter_by_score(*series, is_deseindig);
     break;
-  case 2:
-    if (inp == 4 || inp == 5)
+  case FILTERS::DURATION:
+    if (inp == FILTERS::ALL || inp == FILTERS::MOVIES_OPT)
       filterMovies = filters::filter_by_duration(*movies, is_deseindig);
-    if (inp == 4 || inp == 6)
+    if (inp == FILTERS::ALL || inp == FILTERS::SERIES_OPT)
       filterSeries = filters::filter_by_duration(*series, is_deseindig);
     break;
-  case 3:
-    if (inp == 4 || inp == 5)
+  case FILTERS::GENRE:
+    if (inp == FILTERS::ALL || inp == FILTERS::MOVIES_OPT)
       filterMovies = filters::filter_by_gender(*movies, is_deseindig);
-    if (inp == 4 || inp == 6)
+    if (inp == FILTERS::ALL || inp == FILTERS::SERIES_OPT)
       filterSeries = filters::filter_by_gender(*series, is_deseindig);
     break;
-  case 4:
-    if (inp == 4 || inp == 5)
+  case FILTERS::ALPHABETICALLY:
+    if (inp == FILTERS::ALL || inp == FILTERS::MOVIES_OPT)
       filterMovies = filters::filter_by_title(*movies, is_deseindig);
-    if (inp == 4 || inp == 6)
+    if (inp == FILTERS::ALL || inp == FILTERS::SERIES_OPT)
       filterSeries = filters::filter_by_series_alpha(*series, is_deseindig);
     break;
   default:
     break;
   }
-  utils::clear();
-  if (inp == 4 || inp == 5)
+  // utils::clear();
+  if (inp == FILTERS::MOVIES_OPT || inp == FILTERS::ALL)
     print_movies(&filterMovies);
-  if (inp == 4 || inp == 6)
+  if (inp == FILTERS::SERIES_OPT || inp == FILTERS::ALL)
     print_series(&filterSeries);
   ;
   utils::await_enter();
@@ -208,7 +254,7 @@ void Controller::menu()
   if (inp > 3)
   {
     utils::clear();
-    print_filter_by(inp);
+    print_filter_by(inp - 3);
     return;
   }
   if (inp != DISPLAY_SERIES)

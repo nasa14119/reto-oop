@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "Media.h"
+#include "../const.h"
 
 // Declaración adelantada de User
 class User;
@@ -21,7 +22,8 @@ public:
   void print_series();
   bool menu_user();
   void menu();
-  void print_filter_by(const int &);
+  static MediaVector get_filter_vector(MediaVector, FILTERS);
+  void print_filter_by(int);
   static void print_movies(MediaVector *);
   static void print_series(MediaVector *);
   Media *get_index_movies();

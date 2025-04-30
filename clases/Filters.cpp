@@ -1,5 +1,4 @@
-#ifndef FILTERS
-#define FILTERS
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -92,4 +91,3 @@ namespace filters
     return midias;
   };
 }
-#endif

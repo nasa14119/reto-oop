@@ -44,15 +44,63 @@ void User::save_movie(Media *movie)
 }
 bool User::contains(Media *media) { return keys.contains(media->get_id()); };
 bool User::contains(string str) { return keys.contains(str); };
-void User::save_movie()
+void User::save_movie(MediaVector *movies)
 {
   cout << "Discover movies:" << "\n";
   cout << "1. Order by" << "\n";
-  cout << "2. Search" << "\n";
-  cout << "3. Print by ID" << "\n";
+  cout << "2. Print by ID" << "\n";
+  const int inp = utils::get_dato_int(2);
+  Media *new_movie;
+  if (inp != 1)
+  {
+    Controller::print_movies(movies);
+    new_movie = search_movie(*movies);
+  }
+  else
+  {
+    new_movie = search_movie(Controller::get_filter_vector(*movies, MOVIES_OPT));
+  }
+  utils::clear();
+  cout << "You are going to add this movie:" << "\n";
+  new_movie->print();
+  if (!utils::confirmation())
+  {
+    return;
+  }
+  save_movie(new_movie);
 }
-Media *User::search_movie(MediaVector source_movies)
+void User::delete_movie()
 {
+  cin.ignore();
+  Media *deleting = search_movie(movies, false);
+  utils::clear();
+  cout << "Your are tring to delete this movie:" << "\n";
+  deleting->print();
+  if (!utils::confirmation())
+  {
+    return;
+  }
+  delete_movie(deleting);
+}
+void User::delete_movie(Media *errase)
+{
+  const string errase_id = errase->get_id();
+  for (int i = 0; i < movies.size(); ++i)
+  {
+    Media *element = movies[i];
+    if (element->get_id() == errase_id)
+    {
+      movies.erase(movies.begin() + i);
+      break;
+    }
+  }
+  save_to_file();
+}
+Media *User::search_movie(MediaVector source_movies, bool only_new)
+{
+  if (source_movies.empty())
+    return nullptr;
+  Controller::print_movies(&source_movies);
   MediaVector results;
   while (results.size() != 1)
   {
@@ -65,7 +113,7 @@ Media *User::search_movie(MediaVector source_movies)
     results.clear();
     for (Media *movie : source_movies)
     {
-      if (User::contains(movie))
+      if (only_new && User::contains(movie))
         continue;
       const string id = (movie->get_id()).substr(0, inp.length());
       if (inp.length() <= 3 && inp == id)
@@ -89,10 +137,11 @@ Media *User::search_movie(MediaVector source_movies)
   }
   return results[0];
 }
-Media *User::search_serie(MediaVector source_series)
+Media *User::search_serie(MediaVector source_series, bool only_new)
 {
   MediaVector results;
   cin.ignore();
+  Controller::print_series(&source_series);
   while (results.size() != 1)
   {
     cout << "Enter id or the chapter's title: ";
@@ -104,6 +153,8 @@ Media *User::search_serie(MediaVector source_series)
     results.clear();
     for (Media *series : source_series)
     {
+      if (only_new && User::contains(series))
+        continue;
       Series *series_ = dynamic_cast<Series *>(series);
       if (series_->match_in_titles(inp))
       {
@@ -118,6 +169,30 @@ Media *User::search_serie(MediaVector source_series)
     }
   }
   return results[0];
+}
+void User::save_serie(MediaVector *source_series)
+{
+  cout << "Discover movies:" << "\n";
+  cout << "1. Order by" << "\n";
+  cout << "2. Print by ID" << "\n";
+  const int inp = utils::get_dato_int(2);
+  Media *new_serie;
+  if (inp != 1)
+  {
+    new_serie = search_serie(*source_series);
+  }
+  else
+  {
+    new_serie = search_serie(Controller::get_filter_vector(*source_series, SERIES_OPT));
+  }
+  utils::clear();
+  cout << "You are going to add this serie:" << "\n";
+  new_serie->print();
+  if (!utils::confirmation())
+  {
+    return;
+  }
+  save_serie(new_serie);
 }
 void User::save_serie(Media *serie)
 {

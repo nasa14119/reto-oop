@@ -22,10 +22,13 @@ public:
   User();
   void get_file_data();
   void save_movie(Media *);
-  void save_movie();
-  Media *search_movie(MediaVector);
-  Media *search_serie(MediaVector);
+  void save_movie(MediaVector *);
+  void delete_movie(Media *);
+  void delete_movie();
+  Media *search_movie(MediaVector, bool = true);
+  Media *search_serie(MediaVector, bool = true);
   void save_serie(Media *);
+  void save_serie(MediaVector *);
   void rank_movie(Media *);
   void rank_serie(Media *);
   void save_to_file();
