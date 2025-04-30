@@ -74,3 +74,20 @@ string Series::serialized_data()
   }
   return data;
 }
+bool Series::match_in_titles(string str)
+{
+  const string id_match = id.substr(0, str.length());
+  if (str.length() <= 3 && id_match == str)
+  {
+    return true;
+  }
+  for (Media *serie : series)
+  {
+    const string check = (serie->get_title()).substr(0, str.length());
+    if (check == str)
+    {
+      return true;
+    }
+  }
+  return false;
+}

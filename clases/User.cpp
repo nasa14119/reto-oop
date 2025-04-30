@@ -2,6 +2,7 @@
 #include "User.h"
 #include "Controller.h" // Incluye Controller solo en el archivo fuente
 #include "../const.h"
+#include "Series.h"
 User::User()
 {
   get_file_data();
@@ -90,6 +91,33 @@ Media *User::search_movie(MediaVector source_movies)
 }
 Media *User::search_serie(MediaVector source_series)
 {
+  MediaVector results;
+  cin.ignore();
+  while (results.size() != 1)
+  {
+    cout << "Enter id or the chapter's title: ";
+    string inp;
+    getline(cin, inp);
+    if (inp == "q")
+      exit(0);
+    utils::clear();
+    results.clear();
+    for (Media *series : source_series)
+    {
+      Series *series_ = dynamic_cast<Series *>(series);
+      if (series_->match_in_titles(inp))
+      {
+        results.push_back(series);
+        series->print();
+      }
+    }
+    if (results.empty())
+    {
+      cout << "No serie found try again\n";
+      results.clear();
+    }
+  }
+  return results[0];
 }
 void User::save_serie(Media *serie)
 {

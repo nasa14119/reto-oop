@@ -63,7 +63,13 @@ bool Controller::menu_user()
     std::cout << "2. Delete serie" << "\n";
     std::cout << "3. Rank a serie" << "\n";
     std::cout << "4. Comment a serie" << "\n";
-    int opt = SERIES_EDIT + utils::get_dato_int(4);
+    int opt = SERIES_NEW + (utils::get_dato_int(4) - 1);
+    if (opt == SERIES_NEW)
+    {
+      utils::clear();
+      print_series();
+      user->search_serie(*series);
+    }
     utils::clear();
     return true;
   }

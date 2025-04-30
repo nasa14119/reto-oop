@@ -25,5 +25,6 @@ public:
   string serialized_data();
   SeriesVector get_series() { return series; };
   void set_series(SeriesVector series) { this->series = series; };
+  bool match_in_titles(string);
 };
 #endif
