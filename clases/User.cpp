@@ -22,6 +22,14 @@ void User::get_file_data()
   utils::get_data_movies(movies, "../mydata.csv");
   ifstream series_part = utils::get_data_movies("../mydata.csv");
   utils::get_data_series(series_part, series);
+  for (Media *media : movies)
+  {
+    keys[media->get_id()] = media;
+  }
+  for (Media *media : series)
+  {
+    keys[media->get_id()] = media;
+  }
 }
 User::~User()
 {
@@ -33,8 +41,14 @@ void User::save_movie(Media *movie)
   // Implementación para guardar una película
   save_to_file();
 }
+bool User::contains(Media *media) { return keys.contains(media->get_id()); };
+bool User::contains(string str) { return keys.contains(str); };
 void User::save_movie()
 {
+  cout << "Discover movies:" << "\n";
+  cout << "1. Order by" << "\n";
+  cout << "2. Search" << "\n";
+  cout << "3. Print by ID" << "\n";
 }
 Media *User::search_movie(MediaVector source_movies)
 {
@@ -44,10 +58,14 @@ Media *User::search_movie(MediaVector source_movies)
     cout << "Enter id or the movie's name: ";
     string inp;
     getline(cin, inp);
+    if (inp == "q")
+      exit(0);
     utils::clear();
     results.clear();
     for (Media *movie : source_movies)
     {
+      if (User::contains(movie))
+        continue;
       const string id = (movie->get_id()).substr(0, inp.length());
       if (inp.length() <= 3 && inp == id)
       {
@@ -69,6 +87,9 @@ Media *User::search_movie(MediaVector source_movies)
     }
   }
   return results[0];
+}
+Media *User::search_serie(MediaVector source_series)
+{
 }
 void User::save_serie(Media *serie)
 {
@@ -107,12 +128,13 @@ void User::save_to_file()
   for (int i = 0; i < movies.size(); i++)
   {
     save_file << movies[i]->serialized_data();
+    keys[movies[i]->get_id()] = movies[i];
   }
   save_file << "series" << "\n";
   for (int i = 0; i < series.size(); i++)
   {
     save_file << series[i]->serialized_data();
+    keys[series[i]->get_id()] = series[i];
   }
-
   save_file.close();
 }
