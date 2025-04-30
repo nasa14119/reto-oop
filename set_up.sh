@@ -1,3 +1,6 @@
+touch mydata.csv
+echo "movies" > mydata.csv
+echo "series" >> mydata.csv
 mkdir build 
 cd build
 cmake -G Ninja ..
