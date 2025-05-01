@@ -42,5 +42,11 @@ public:
     data += "\n";
     return data;
   }
+  Media *copy_clean()
+  {
+    Movies *copy = new Movies(*this);
+    copy->clear();
+    return copy;
+  }
 };
 #endif

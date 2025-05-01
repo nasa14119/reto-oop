@@ -87,6 +87,7 @@ bool Controller::menu_user()
       break;
     case SERIES_RANK:
       user->rank_series();
+      break;
     case SERIES_COMMENT:
       user->comment_series();
       break;

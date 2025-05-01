@@ -24,12 +24,13 @@ public:
   // Methods
   bool match_str(std::string);
   // Abstract methods
+  virtual Media *copy_clean() = 0;
   virtual void print() = 0;
   virtual std::string serialized_data() = 0;
   // Setters
   virtual void set_rank();
   virtual void set_comment();
-  void set_rank(float score) { this->score = score; };
+  void clear();
   std::string get_score_str();
   // Getters
   float get_score() { return score; };

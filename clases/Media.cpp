@@ -37,3 +37,8 @@ void Media::set_comment()
     exit(0);
   this->comments = inp;
 }
+void Media::clear()
+{
+  this->comments = "";
+  this->score = 0;
+}

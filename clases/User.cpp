@@ -38,7 +38,7 @@ User::~User()
 };
 void User::save_movie(Media *movie)
 {
-  this->movies.push_back(movie);
+  this->movies.push_back(movie->copy_clean());
   // Implementación para guardar una película
   save_to_file();
 }
@@ -61,6 +61,8 @@ void User::save_movie(MediaVector movies)
     new_movie = search_movie(Controller::get_filter_vector(movies, MOVIES_OPT));
   }
   utils::clear();
+  if (new_movie == nullptr)
+    return;
   cout << "You are going to add this movie:" << "\n";
   new_movie->print();
   if (!utils::confirmation())
@@ -73,6 +75,8 @@ void User::delete_movie()
 {
   cin.ignore();
   Media *deleting = search_movie(movies, false);
+  if (deleting == nullptr)
+    return;
   utils::clear();
   cout << "Your are tring to delete this movie:" << "\n";
   deleting->print();
@@ -98,8 +102,15 @@ void User::delete_movie(Media *errase)
 }
 void User::delete_series()
 {
-  cin.ignore();
-  Media *deleting = search_movie(series, false);
+  if (series.empty())
+  {
+    cout << "No content to delete \n";
+    utils::await_enter();
+    return;
+  }
+  Media *deleting = search_serie(series, false);
+  if (deleting == nullptr)
+    return;
   utils::clear();
   cout << "Your are tring to delete this serie:" << "\n";
   deleting->print();
@@ -107,17 +118,17 @@ void User::delete_series()
   {
     return;
   }
-  delete_movie(deleting);
+  delete_series(deleting);
 }
 void User::delete_series(Media *errase)
 {
   const string errase_id = errase->get_id();
   for (int i = 0; i < series.size(); ++i)
   {
-    Media *element = movies[i];
+    Media *element = series[i];
     if (element->get_id() == errase_id)
     {
-      movies.erase(series.begin() + i);
+      series.erase(series.begin() + i);
       break;
     }
   }
@@ -136,6 +147,8 @@ Media *User::search_movie(MediaVector source_movies, bool only_new)
     getline(cin, inp);
     if (inp == "q")
       exit(0);
+    if (inp == "..")
+      return nullptr;
     utils::clear();
     results.clear();
     for (Media *movie : source_movies)
@@ -158,8 +171,9 @@ Media *User::search_movie(MediaVector source_movies, bool only_new)
 }
 Media *User::search_serie(MediaVector source_series, bool only_new)
 {
+  if (source_series.empty())
+    return nullptr;
   MediaVector results;
-  cin.ignore();
   Controller::print_series(&source_series);
   while (results.size() != 1)
   {
@@ -205,6 +219,8 @@ void User::save_serie(MediaVector *source_series)
     new_serie = search_serie(Controller::get_filter_vector(*source_series, SERIES_OPT));
   }
   utils::clear();
+  if (new_serie == nullptr)
+    return;
   cout << "You are going to add this serie:" << "\n";
   new_serie->print();
   if (!utils::confirmation())
@@ -215,32 +231,64 @@ void User::save_serie(MediaVector *source_series)
 }
 void User::save_serie(Media *serie)
 {
-  this->series.push_back(serie);
+  this->series.push_back(serie->copy_clean());
   // Implementación para guardar una serie
   save_to_file();
 }
 
 void User::rank_movies()
 {
+  if (movies.empty())
+  {
+    cout << "No movies to rank" << "\n";
+    utils::await_enter();
+    return;
+  }
   Media *movie = search_movie(movies, false);
+  if (movie == nullptr)
+    return;
   movie->set_rank();
   save_to_file();
 }
 void User::comment_movies()
 {
+  if (movies.empty())
+  {
+    cout << "No movies to comment" << "\n";
+    utils::await_enter();
+    return;
+  }
   Media *movie = search_movie(movies, false);
+  if (movie == nullptr)
+    return;
   movie->set_comment();
   save_to_file();
 }
 void User::comment_series()
 {
+  if (series.empty())
+  {
+    cout << "No content to comment \n";
+    utils::await_enter();
+    return;
+  }
   Media *serie = search_movie(series, false);
+  if (serie == nullptr)
+    return;
   serie->set_comment();
   save_to_file();
 }
 void User::rank_series()
 {
+  if (series.empty())
+  {
+    cout << "No content to rank \n";
+    utils::await_enter();
+    return;
+  }
   Media *serie = search_serie(series, false);
+  if (serie == nullptr)
+    return;
   serie->set_rank();
   dynamic_cast<Series *>(serie)->update_score();
   save_to_file();

@@ -148,3 +148,22 @@ void Series::update_score()
   }
   this->score = (score / (float)series.size());
 }
+void Series::clear()
+{
+  for (int i = 0; i < series.size(); ++i)
+  {
+    Serie *serie = series.at(i);
+    serie->clear();
+    series[i] = dynamic_cast<Serie *>(serie->copy_clean());
+  }
+}
+Media *Series::copy_clean()
+{
+  Series *copy = new Series(*this);
+  copy->clear();
+  return copy;
+}
+Media *Serie::copy_clean()
+{
+  return new Serie(*this);
+}

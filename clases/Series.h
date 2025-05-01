@@ -9,6 +9,7 @@ public:
   using Media::Media;
   void print();
   string serialized_data();
+  Media *copy_clean();
 };
 using SeriesVector = vector<Serie *>;
 class Series : public Media
@@ -27,7 +28,9 @@ public:
   void set_series(SeriesVector series) { this->series = series; };
   bool match_in_titles(string);
   void set_rank();
+  void clear();
   void update_score();
   void set_comment();
+  Media *copy_clean();
 };
 #endif
