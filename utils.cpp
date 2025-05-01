@@ -227,12 +227,17 @@ bool utils::confirmation()
 }
 float utils::get_dato_float(int max)
 {
-  float result;
+  float result = 0;
   string inp;
+  cin.clear();
   while (true)
   {
     cout << "value: ";
-    getline(cin, inp);
+    cin >> inp;
+    if (inp == "q")
+      exit(0);
+    if (inp == "..")
+      return -1;
     try
     {
       stof(inp);
@@ -244,12 +249,12 @@ float utils::get_dato_float(int max)
     }
     if (result > max)
     {
-      cout << "Error max size reach";
+      cout << "Can't exceed maximun value" << "\n";
       continue;
     }
     if (result < 0)
     {
-      cout << "Error value can't be negative";
+      cout << "Error value can't be negative" << "\n";
       continue;
     }
     break;

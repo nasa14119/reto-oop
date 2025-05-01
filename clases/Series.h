@@ -26,5 +26,7 @@ public:
   SeriesVector get_series() { return series; };
   void set_series(SeriesVector series) { this->series = series; };
   bool match_in_titles(string);
+  void set_rank();
+  void update_score();
 };
 #endif

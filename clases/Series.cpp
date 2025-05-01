@@ -91,3 +91,36 @@ bool Series::match_in_titles(string str)
   }
   return false;
 }
+void Series::set_rank()
+{
+  int i = 0;
+  Serie *found = nullptr;
+  string inp;
+  while (i != 1)
+  {
+    i = 0;
+    getline(cin, inp);
+    utils::clear();
+    for (Serie *serie : series)
+    {
+      if (serie->match_str(inp))
+      {
+        i++;
+        serie->print();
+        found = serie;
+      }
+    }
+    if (i == 0)
+      cout << "No match in series title\n";
+  }
+  found->set_rank();
+}
+void Series::update_score()
+{
+  float score = 0;
+  for (Media *serie : series)
+  {
+    score += serie->get_score();
+  }
+  this->score = (score / (float)series.size());
+}

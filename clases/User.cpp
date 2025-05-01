@@ -44,7 +44,7 @@ void User::save_movie(Media *movie)
 }
 bool User::contains(Media *media) { return keys.contains(media->get_id()); };
 bool User::contains(string str) { return keys.contains(str); };
-void User::save_movie(MediaVector *movies)
+void User::save_movie(MediaVector movies)
 {
   cout << "Discover movies:" << "\n";
   cout << "1. Order by" << "\n";
@@ -53,12 +53,12 @@ void User::save_movie(MediaVector *movies)
   Media *new_movie;
   if (inp != 1)
   {
-    Controller::print_movies(movies);
-    new_movie = search_movie(*movies);
+    Controller::print_movies(&movies);
+    new_movie = search_movie(movies);
   }
   else
   {
-    new_movie = search_movie(Controller::get_filter_vector(*movies, MOVIES_OPT));
+    new_movie = search_movie(Controller::get_filter_vector(movies, MOVIES_OPT));
   }
   utils::clear();
   cout << "You are going to add this movie:" << "\n";
@@ -142,15 +142,7 @@ Media *User::search_movie(MediaVector source_movies, bool only_new)
     {
       if (only_new && User::contains(movie))
         continue;
-      const string id = (movie->get_id()).substr(0, inp.length());
-      if (inp.length() <= 3 && inp == id)
-      {
-        results.push_back(movie);
-        movie->print();
-        continue;
-      }
-      string check = (movie->get_title()).substr(0, inp.length());
-      if (check == inp)
+      if (movie->match_str(inp))
       {
         results.push_back(movie);
         movie->print();
@@ -228,28 +220,20 @@ void User::save_serie(Media *serie)
   save_to_file();
 }
 
-void User::rank_movie(Media *movie)
+void User::rank_movies()
 {
-  // Implementación para rankear una película
-  float new_score = movie->get_score();
-  cout << "What would you rate the movie?" << "\n";
-  float answer;
-  cin >> answer;
-  new_score = (new_score + answer) / 2;
-  movie->set_score(new_score);
+  Media *movie = search_movie(movies, false);
+  movie->set_rank();
+  save_to_file();
 }
 
-void User::rank_serie(Media *serie)
+void User::rank_series()
 {
-  // Implementación para rankear una serie
-  float new_score = serie->get_score();
-  cout << "What would you rate the series?" << "\n";
-  float answer;
-  cin >> answer;
-  new_score = (new_score + answer) / 2;
-  serie->set_score(new_score);
+  Media *serie = search_serie(series, false);
+  serie->set_rank();
+  dynamic_cast<Series *>(serie)->update_score();
+  save_to_file();
 }
-
 void User::save_to_file()
 {
   string file_path = utils::get_file_path("../mydata.csv");

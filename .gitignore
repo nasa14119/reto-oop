@@ -2,3 +2,6 @@ main.dSYM/*
 build/*
 main
 mydata.csv
+cmake-build-debug/*
+.DS_Store
+.idea/*

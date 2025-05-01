@@ -52,10 +52,13 @@ bool Controller::menu_user()
     switch (opt)
     {
     case MOVIES_NEW:
-      user->save_movie(movies);
+      user->save_movie(*movies);
       break;
     case MOVIES_DELETE:
       user->delete_movie();
+      break;
+    case MOVIES_RANK:
+      user->rank_movies();
       break;
     default:
       break;
@@ -79,6 +82,8 @@ bool Controller::menu_user()
     case SERIES_DELETE:
       user->delete_series();
       break;
+    case SERIES_RANK:
+      user->rank_series();
     default:
       break;
     }

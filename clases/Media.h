@@ -2,7 +2,6 @@
 #define MEDIA
 #include <iomanip>
 #include <vector>
-#include <sstream>
 class Media;
 using MediaVector = std::vector<Media *>;
 class Media
@@ -22,19 +21,20 @@ public:
     this->duration = duration;
     this->score = score;
   };
+  // Methods
+  bool match_str(std::string);
+  // Abstract methods
   virtual void print() = 0;
+  virtual std::string serialized_data() = 0;
+  // Setters
+  virtual void set_rank();
+  void set_rank(float score) { this->score = score; };
+  std::string get_score_str();
+  // Getters
   float get_score() { return score; };
   std::string get_id() { return id; };
   int get_duration() { return duration; };
-  std::string get_score_str()
-  {
-    std::ostringstream out;
-    out << std::fixed << std::setprecision(1) << score; // Mantén 1 decimal siempre
-    return out.str();
-  };
   std::string get_gender() { return gender; };
   std::string get_title() { return title; };
-  virtual std::string serialized_data() = 0;
-  void set_score(float score) { this->score = score; };
 };
 #endif
