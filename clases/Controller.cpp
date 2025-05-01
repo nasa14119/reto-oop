@@ -261,6 +261,8 @@ void Controller::menu()
   std::cout << "7. Login as user" << "\n";
   const int inp = utils::get_dato_int(7);
   utils::clear();
+  if (inp < 0)
+    return;
   if (inp == 7)
   {
     bool is_runnig = true;
