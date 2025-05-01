@@ -22,5 +22,6 @@ public:
   static int get_dato_int(int);
   static void await_enter();
   static bool confirmation();
+  static float get_dato_float(int = 5);
 };
 #endif

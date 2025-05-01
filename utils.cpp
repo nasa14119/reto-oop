@@ -225,3 +225,34 @@ bool utils::confirmation()
   clear();
   return inp == "y";
 }
+float utils::get_dato_float(int max)
+{
+  float result;
+  string inp;
+  while (true)
+  {
+    cout << "value: ";
+    getline(cin, inp);
+    try
+    {
+      stof(inp);
+      result = stof(inp);
+    }
+    catch (const std::exception &e)
+    {
+      cout << "Error in data type" << "\n";
+    }
+    if (result > max)
+    {
+      cout << "Error max size reach";
+      continue;
+    }
+    if (result < 0)
+    {
+      cout << "Error value can't be negative";
+      continue;
+    }
+    break;
+  }
+  return result;
+}
