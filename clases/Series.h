@@ -28,5 +28,6 @@ public:
   bool match_in_titles(string);
   void set_rank();
   void update_score();
+  void set_comment();
 };
 #endif

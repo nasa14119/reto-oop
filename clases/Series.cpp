@@ -115,6 +115,30 @@ void Series::set_rank()
   }
   found->set_rank();
 }
+void Series::set_comment()
+{
+  int i = 0;
+  Serie *found = nullptr;
+  string inp;
+  while (i != 1)
+  {
+    i = 0;
+    getline(cin, inp);
+    utils::clear();
+    for (Serie *serie : series)
+    {
+      if (serie->match_str(inp))
+      {
+        i++;
+        serie->print();
+        found = serie;
+      }
+    }
+    if (i == 0)
+      cout << "No match in series title\n";
+  }
+  found->set_comment();
+}
 void Series::update_score()
 {
   float score = 0;

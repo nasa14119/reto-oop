@@ -226,7 +226,18 @@ void User::rank_movies()
   movie->set_rank();
   save_to_file();
 }
-
+void User::comment_movies()
+{
+  Media *movie = search_movie(movies, false);
+  movie->set_comment();
+  save_to_file();
+}
+void User::comment_series()
+{
+  Media *serie = search_movie(series, false);
+  serie->set_comment();
+  save_to_file();
+}
 void User::rank_series()
 {
   Media *serie = search_serie(series, false);

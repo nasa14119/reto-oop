@@ -60,6 +60,9 @@ bool Controller::menu_user()
     case MOVIES_RANK:
       user->rank_movies();
       break;
+    case MOVIES_COMMENT:
+      user->comment_movies();
+      break;
     default:
       break;
     }
@@ -84,6 +87,9 @@ bool Controller::menu_user()
       break;
     case SERIES_RANK:
       user->rank_series();
+    case SERIES_COMMENT:
+      user->comment_series();
+      break;
     default:
       break;
     }

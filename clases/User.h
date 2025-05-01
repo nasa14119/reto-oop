@@ -33,6 +33,8 @@ public:
   void save_serie(MediaVector *);
   void rank_movies();
   void rank_series();
+  void comment_movies();
+  void comment_series();
   void save_to_file();
   void print(MENU_USER);
   bool contains(Media *);

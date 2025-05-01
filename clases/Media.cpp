@@ -26,3 +26,14 @@ bool Media::match_str(const string inp)
   const string id_ = id.substr(0, inp.length());
   return id_ == inp || to_check == inp;
 }
+void Media::set_comment()
+{
+  cout << "Change the comment in this chapter: ";
+  string inp;
+  getline(cin, inp);
+  if (inp == "..")
+    return;
+  if (inp == "q")
+    exit(0);
+  this->comments = inp;
+}

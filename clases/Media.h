@@ -28,6 +28,7 @@ public:
   virtual std::string serialized_data() = 0;
   // Setters
   virtual void set_rank();
+  virtual void set_comment();
   void set_rank(float score) { this->score = score; };
   std::string get_score_str();
   // Getters
