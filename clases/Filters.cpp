@@ -69,6 +69,10 @@ namespace filters
   };
   MediaVector filter_by_series_alpha(MediaVector midias, bool alphabetical = true)
   {
+    sort(midias.begin(), midias.end(), [](Media *a, Media *b)
+         { return a->get_id() > b->get_id(); });
+    if (!alphabetical)
+      reverse(midias.begin(), midias.end());
     int i = 0;
     for (Media *media : midias)
     {
@@ -86,6 +90,7 @@ namespace filters
       }
       series->set_series(vector_series);
       midias[i] = series;
+      i++;
     }
 
     return midias;
